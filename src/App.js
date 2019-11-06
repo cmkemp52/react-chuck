@@ -19,9 +19,7 @@ class App extends Component{
       <div>
         <Quote category={category}/> 
         <br/>
-        <select onChange={(e)=> this.changeCategory(e)} value={this.state.value}>
-          <getCategories/>
-        </select>
+        <getCategories/>
       </div>
     );
   }
