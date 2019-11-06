@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import Quote from './components/quotes';
+import getCategories from './components/quotes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  state = {
+    category: "sport",
+  }
+
+
+  changeCategory = (category)=>{
+    this.setState({
+      category: category.target.value
+    })
+  }
+  render(){
+    const {category}=this.state;
+    return (
+      <div>
+        <Quote category={category}/> 
+        <br/>
+        <select onChange={(e)=> this.changeCategory(e)} value={this.state.value}>
+          <getCategories/>
+        </select>
+      </div>
+    );
+  }
 }
 
 export default App;
