@@ -6,15 +6,11 @@ class Quote extends Component{
         quote: `Fetching quotes...`
     }
     async componentDidMount(){
-        this.getQuote();
+        console.log("props are ", this.props)
+        const category = this.props.match.params.category_name;
+        this.getQuote(category);
     }
-    componentDidUpdate(prevProps){
-        if(prevProps.category !== this.props.category){
-            this.getQuote();
-        }
-    }
-    getQuote = async ()=>{
-        const {category} = this.props;
+    getQuote = async (category)=>{
         const data = await loadData(`https://api.chucknorris.io/jokes/random?category=${category}`)
         const quote = data.value;
         this.setState({
@@ -22,11 +18,11 @@ class Quote extends Component{
         })
     };
     handleClick = ()=>{
-        this.getQuote();
+        this.getQuote(this.props.match.params.category_name);
     };
     render(){
         const {quote} = this.state;
-        const {category} = this.props;
+        const category = this.props.match.params.category_name;
         return (
             <>
                 <p>{quote}</p>
